@@ -1,11 +1,14 @@
-# @gpt — GPT's Workspace
+[![OAUTH-API-GENERATOR](https://github.com/Sovereignty-One/SuperGrok-Heavy-4-2-Skeleton/actions/workflows/oauth-api-generator.yml/badge.svg)](https://github.com/Sovereignty-One/SuperGrok-Heavy-4-2-Skeleton/actions/workflows/oauth-api-generator.yml)
 
-This is GPT / Codex's dedicated branch. All changes by GPT must be made here.
+[![NowSecure Mobile SBOM](https://github.com/Sovereignty-One/SuperGrok-Heavy-4-2-Skeleton/actions/workflows/nowsecure-mobile-sbom.yml/badge.svg)](https://github.com/Sovereignty-One/SuperGrok-Heavy-4-2-Skeleton/actions/workflows/nowsecure-mobile-sbom.yml)
+# @claude @codex @copilot @grok
+
+This is the main dedicated branch. All changes by Claude Grok/Ara GPT/Codex Copilot must be made in their dedicated branch.
 Do not push directly to main. Create a Pull Request for review.
 
 ---
 
-# SuperGrok Heavy 4.2 Skeleton
+# https://github.com/Sovereignty-One/Grok-4.6-ChatGPT-6-Claude-5.1-Skeleton/tree/main
 
 This repository is the full SuperGrok workspace: dashboard, bridge, backend, mobile, voice, security, and support modules all live here.
 
