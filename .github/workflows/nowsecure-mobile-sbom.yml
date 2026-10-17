@@ -2,8 +2,12 @@ name: "NowSecure Mobile SBOM"
 
 on:
   push:
-    branches: pull_request:
-    branches: schedule:
+    branches: 
+         - main
+    pull_request:
+    branches: 
+         - main
+    schedule:
     - cron: '15 1 * * 2'
 
 permissions:
