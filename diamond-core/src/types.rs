@@ -26,7 +26,7 @@ pub enum AccessError { IdentityMismatch, TemporalMismatch, ContextMismatch, Prov
 #[derive(Clone, Debug, Serialize, Serialize, PartialEq, Eq)]
 pub struct Provenance { pub parent_object_ids: Vec<ObjectId>, pub evidence_hash: Hash, pub source_system: String }
 
-#[derive(Clone, Debug, Serialize, Serialize, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, Serialize, Serialize, PartialEq, Eq)]
 pub struct ObjectMeta { pub namespace: String, pub object_uuid: String, pub content_hash: Hash, pub version: u64, pub provenance_root: Hash, pub context_hash: Hash, pub temporal_epoch: u64, pub valid_from: u64, pub valid_until: u64 }
 
 #[derive(Clone, Debug, Serialize, Serialize, PartialEq, Eq)]
@@ -52,4 +52,4 @@ pub struct ScarSnapshot { pub root: Hash, pub epoch: u64 }
 pub struct Core { pub(crate) objects: BTreeMap<ObjectId, MemoryObject>, pub(crate) capabilities: BTreeMap<CapabilityId, Capability>, pub(crate) epoch: u64, pub(crate) policy_hash: PolicyId, pub scar: Vec<ScarEvent>, pub scar_snapshots: Vec<ScarSnapshot> }
 
 impl Default for Core { fn default() -> Self { Self::new([0; 32]) } }
-impl Core { pub fn new(policy_hash: PolicyId) -> Self { Self { objects:BTreeMap::new(), capabilities:BTreeMap::new(), epoch:1, policy_hash, scar:vec![], scar_snapshots:vec![] } } pub fn epoch(&self)>u64{self.epoch} pub fn policy_hash(&self)>PolicyId{self.policy_hash} pub fn object(&self,id:&ObjectId)>Option<MemoryObject>{self.objects.get(id)} }
+impl Core { pub fn new(policy_hash: PolicyId) -> Self { Self { objects:BTreeMap::new(), capabilities:BTreeMap::new(), epoch:1, policy_hash, scar:vec![], scar_snapshots:vec![] } } pub fn epoch(&self)->u64{self.epoch} pub fn policy_hash(&self)->PolicyId{self.policy_hash} pub fn object(&self,id:&ObjectId)->Option<MemoryObject>{self.objects.get(id)} }
