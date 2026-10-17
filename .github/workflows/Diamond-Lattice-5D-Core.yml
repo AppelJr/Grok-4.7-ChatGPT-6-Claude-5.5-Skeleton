@@ -4,12 +4,12 @@ on:
   push:
     paths:
       - 'diamond-core/**'
-      - '.github/workflows/diamond-core-v0.1.yml'
+      - '.github/workflows/Diamond-Lattice-5D-Core.yml'
   pull_request:
     branches: [ "Collaboration", "main" ]
     paths:
       - 'diamond-core/**'
-      - '.github/workflows/diamond-core-v0.1.yml'
+      - '.github/workflows/Diamond-Lattice-5D-Core.yml'
   workflow_dispatch:
 
 permissions:
