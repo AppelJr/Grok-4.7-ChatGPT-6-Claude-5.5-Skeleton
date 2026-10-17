@@ -23,6 +23,7 @@ jobs:
           python-version: '3.13'
 
       - name: Install dependencies
+        shell: bash
         run: |
           python -m pip install --upgrade pip
           pip install ruff mypy pytest
@@ -36,4 +37,5 @@ jobs:
         run: mypy .
 
       - name: Run tests
-        run: pytest
+        run: |
+          pytest
