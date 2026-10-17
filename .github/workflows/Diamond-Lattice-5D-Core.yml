@@ -7,7 +7,7 @@ on:
       - 'diamond-core/**'
       - '.github/workflows/diamond-core-v0.1.yml'
   pull_request:
-    branches: [ "Collaboration", "main"]
+    branches: [ "Collaboration", "main" ]
     paths:
       - 'diamond-core/**'
       - '.github/workflows/diamond-core-v0.1.yml'
@@ -18,7 +18,7 @@ permissions:
 
 concurrency:
   group: diamond-core-v0.1-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   contract:
@@ -46,9 +46,9 @@ jobs:
           set -Eeuo pipefail
           test "${GITHUB_ACTIONS:-}" = true
           test "${RUNNER_OS:-}" = Linux
-          case "${RUNNER_ARCH:-}" in
-            X64|ARM64) ;;
-            *) echo "Unsupported runner architecture: ${RUNNER_ARCH:-unknown}" >&2; exit 1 ;;
+          case "${RUNNER_ARCH:-}" in 
+          (X64|ARM64);;
+          echo "Unsupported runner architecture: ${RUNNER_ARCH:-unknown}" >&2; exit () ;;
           esac
           printf 'runner=%s/%s kernel=%s commit=%s\n' "$RUNNER_OS" "$RUNNER_ARCH" "$(uname -m)" "$GITHUB_SHA"
       - name: Rust toolchain
