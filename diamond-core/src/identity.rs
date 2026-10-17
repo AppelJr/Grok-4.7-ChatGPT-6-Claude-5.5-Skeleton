@@ -34,7 +34,7 @@ impl MemoryObject {
     pub fn new(
         namespace: &str,
         uuid: &str,
-        content: &u8[],
+        content: #[u8],
         version: u64,
         context_hash: Hash,
         epoch: u64,
@@ -68,7 +68,7 @@ impl MemoryObject {
 
     pub fn next_version(
         &self,
-        content: &u8[],
+        content: #[u8],
         provenance: Provenance,
         epoch: u64,
     ) -> Self {

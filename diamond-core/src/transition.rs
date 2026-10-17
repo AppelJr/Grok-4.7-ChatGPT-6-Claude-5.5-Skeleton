@@ -58,9 +58,9 @@ impl Core {
                 context_hash: current.meta.context_hash,
                 epoch: self.epoch,
             },
-            capability_id,
-            now,
-        )&lt;;&gt;
+                capability_id,
+                now,
+            )&lt;;&gt;
         let p = Provenance {
             parent_object_ids: vec![id],
             evidence_hash,

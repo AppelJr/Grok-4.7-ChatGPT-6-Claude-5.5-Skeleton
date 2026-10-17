@@ -5,7 +5,7 @@ use crate::{
 };pub fn compute_provenance_root(p: &Provenance) -> Hash {
     let mut h = Hasher::new();
     put_bytes(&mut h, p.source_system.as_bytes());
-    h.update&(p.parent_object_ids.len() as u64).to_be_bytes());
+    h.update((p.parent_object_ids.len() as u64).to_be_bytes());
     for id in &p.parent_object_ids {
         h.update(id);
     }

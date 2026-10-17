@@ -28,7 +28,7 @@ fn cap(
     c: &mut Core,
     subject: SubjectId,
     id: ObjectId,
-    ops: impl IntoIterator&lt;Item = Operation&gt;,
+    ops: impl IntoIterator<Item = Operation>,
 ) -> CapabilityId {
     c.issue_capability(
         subject,
@@ -42,5 +42,3 @@ fn cap(
 fn subject() -> SubjectId {
     hash_bytes(b"model")
 }
-
-&lt;|open|>_reserved_&lt;|sep|>_reserved&lt;|close|>_reserved
