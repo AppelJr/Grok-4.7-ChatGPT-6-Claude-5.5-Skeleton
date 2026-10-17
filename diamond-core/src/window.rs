@@ -2,13 +2,13 @@ use crate::types::*;
 use blake3::Hasher;
 use std::collections::BTreeSet;
 
-pub fn window_contains_all(window: &MemoryWindow, visible: &ObjectId) -> bool {
-    visible.iter().all(|id| window.object_ids.contains(id))
+pub fn window_contains_all(window: &MemoryWindow, visible: impl IntoIterator&lt;Item = ObjectId&gt;) -> bool {
+    visible.into_iter().all(|id| window.object_ids.contains(&id))
 }
 
 pub fn make_window(
     _subject: SubjectId,
-    ids: BTreeSet<ObjectId>,
+    ids: BTreeSet&lt;ObjectId&gt;,
     maximum_bytes: u64,
     context_hash: Hash,
     capability_id: CapabilityId,
