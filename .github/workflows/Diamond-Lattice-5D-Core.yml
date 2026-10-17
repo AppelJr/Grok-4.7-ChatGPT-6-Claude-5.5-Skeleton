@@ -62,7 +62,7 @@ jobs:
           rustc --version
       - name: Diamond Core tests
         shell: bash
-        download_url: ""
+        run: |
           set -Eeuo pipefail
           test -f diamond-core/Cargo.toml
           cargo test --manifest-path diamond-core/Cargo.toml --all-targets
