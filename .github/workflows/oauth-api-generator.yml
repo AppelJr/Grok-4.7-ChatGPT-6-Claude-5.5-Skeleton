@@ -2,7 +2,7 @@ name: OAUTH-API-GENERATOR
 
 on:
   push:
-    branches: [main]
+    branches: ["main"]
     paths:
       - "**/*.py"
       - "**/*.js"
@@ -12,7 +12,7 @@ on:
       - "!**/*.md"
     tags: ["v*.*.*"]
   pull_request:
-    branches: [main]
+    branches: ["main"]
     paths:
       - "**/*.py"
       - "**/*.js"
