@@ -17,7 +17,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: diamond-core-v0.1-${{ github.ref }}
+  group: diamond-core-v0.1-${{ github.ref }
   cancel-in-progress: true
 
 jobs:
@@ -28,7 +28,7 @@ jobs:
     steps:
       - name: Checkout without third-party actions
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ github.token }
         shell: bash
         run: |
           set -Eeuo pipefail
@@ -44,13 +44,15 @@ jobs:
         shell: bash
         run: |
           set -Eeuo pipefail
-          test "${GITHUB_ACTIONS:-}" = true
+          test "${github_ACTIONS:-}" = true
           test "${RUNNER_OS:-}" = Linux
-          case "${RUNNER_ARCH:-}" in 
+          case "${RUNNER_ARCH:-}" in
           (X64|ARM64);;
-          echo "Unsupported runner architecture: ${RUNNER_ARCH:-unknown}" >&2; exit () ;;
+          echo "Unsupported runner architecture: ${RUNNER_ARCH:-unknown}"
+          exit 1
+          ;;
           esac
-          printf 'runner=%s/%s kernel=%s commit=%s\n' "$RUNNER_OS" "$RUNNER_ARCH" "$(uname -m)" "$GITHUB_SHA"
+          printf 'runner=%s/%s kernel=%s commit=%s\n' "${RUNNER_OS}" "${RUNNER_ARCH}" "$(uname -m)" "${github_SHA}"
       - name: Rust toolchain
         shell: bash
         run: |
@@ -70,4 +72,4 @@ jobs:
         run: |
           set -Eeuo pipefail
           echo 'DIAMOND_LATTICE_V0_1=PASS'
-          echo "Validated commit: ${GITHUB_SHA}"
+          echo "Validated commit: ${github_SHA}"
