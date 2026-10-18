@@ -16,7 +16,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: diamond-core-v0.1-${{ github.ref }
+  group: diamond-core-v0.1-${{ github.ref } }
   cancel-in-progress: true
 
 jobs:
@@ -27,11 +27,11 @@ jobs:
     steps:
       - name: Checkout without third-party actions
         env:
-          GH_TOKEN: ${{ github.token }
+          GH_TOKEN: ${{ github.token } }
         shell: bash
         run: |
           set -Eeuo pipefail
-          : "${GH_TOKEN:?GITHUB_TOKEN is required}"
+          : "${GH_TOKEN:?GITHub_TOKEN is required}"
           rm -rf .git
           git init .
           git remote add origin "https://github.com/${{ github.repository }.git"
