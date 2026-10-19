@@ -32,7 +32,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: oauth-api-${{ github.ref }}
+  group: oauth-api-${{ github.ref }
   cancel-in-progress: true
 
 jobs:
@@ -96,27 +96,28 @@ jobs:
         uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567 # v3.4.0
         with:
           registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ github.actor }
+          password: ${{ secrets.github_token }
 
       - name: Compute image name
         shell: bash
-        run: echo "IMAGE=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_ENV"
+        run: echo "IMAGE=ghcr.io/${github.repository,,}" >> "$github_env"
 
       - name: Build and publish multi-architecture image
         uses: docker/build-push-action@ca877d9245402d1537745e0e356eab47c3520991 # v6.18.0
         with:
           context: .
+          file: Dockerfile.backend
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ${{ env.IMAGE }}:latest
-            ${{ env.IMAGE }}:${{ github.sha }}
+            ${{ env.image }}:latest
+            ${{ env.image }}:${{ github.sha }
 
       - name: Install Cosign
         uses: sigstore/cosign-installer@d7543c93d881b35a8faa02e8e3605f69b7a1ce62 # v3.10.0
 
       - name: Sign published image
         env:
-          COSIGN_EXPERIMENTAL: "1"
-        run: cosign sign --yes ${{ env.IMAGE }}:${{ github.sha }}
+          cosign_experimental: "1"
+        run: cosign sign --yes ${{ env.image }}:${{ github.sha }
