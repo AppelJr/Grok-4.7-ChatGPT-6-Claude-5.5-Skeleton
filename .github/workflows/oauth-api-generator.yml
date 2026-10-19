@@ -36,7 +36,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: oauth-api-${{ github.ref }}
+  group: oauth-api-${{ github.ref }
   cancel-in-progress: true
 
 jobs:
@@ -129,4 +129,5 @@ jobs:
       - name: Sign published image
         env:
           IMAGE: ${{ steps.image.outputs.image }
-        run: cosign sign --yes "${IMAGE}:${{ github.sha }"
+          SHA: ${{ github.sha }
+        run: cosign sign --yes "${IMAGE}:$SHA"
