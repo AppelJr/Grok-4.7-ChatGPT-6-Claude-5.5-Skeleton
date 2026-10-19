@@ -2,7 +2,7 @@ name: OAuth API Generator — Validation & Release
 
 on:
   push:
-    branches: 
+    branches:
       - main
     tags: ["v*.*.*"]
     paths:
@@ -16,7 +16,7 @@ on:
       - "!docs/**"
       - "!**/*.md"
   pull_request:
-    branches: 
+    branches:
       - main
     paths:
       - "**/*.py"
@@ -102,16 +102,15 @@ jobs:
         uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567 # v3.4.0
         with:
           registry: ghcr.io
-          username: ${{ github.actor}}
-          password: ${{ secrets.github_token}}
+          username: ${{ github.actor }
+          password: ${{ secrets.github_token }
 
       - name: Compute image name
         id: image
         shell: bash
         run: |
           set -Eeuo pipefail
-          image="ghcr.io/${BASH_REMATCH[0]}"
-          echo "image=${image}" >> "$BASH_REMATCH[0]"
+          echo "image=ghcr.io/${{ github.repository }" >> "$GHA_OUTPUT"
 
       - name: Build and publish multi-architecture image
         uses: docker/build-push-action@ca877d9245402d1537745e0e356eab47c3520991 # v6.18.0
@@ -122,12 +121,12 @@ jobs:
           push: true
           tags: |
             ${{ steps.image.outputs.image }}:latest
-            ${{ steps.image.outputs.image }}:${{ github.sha}}
+            ${{ steps.image.outputs.image }}:${{ github.sha }
 
       - name: Install Cosign
         uses: sigstore/cosign-installer@d7543c93d881b35a8faa02e8e3605f69b7a1ce62 # v3.10.0
 
       - name: Sign published image
         env:
-          IMAGE: ${{ steps.image.outputs.image}}
-        run: cosign sign --yes "${IMAGE}:$BASH_REMATCH[0]"
+          IMAGE: ${{ steps.image.outputs.image }
+        run: cosign sign --yes "${IMAGE}:${{ github.sha }"
