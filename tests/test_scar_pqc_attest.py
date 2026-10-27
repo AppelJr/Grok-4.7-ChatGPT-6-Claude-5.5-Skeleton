@@ -27,3 +27,15 @@ class ChainTests(unittest.TestCase):
             p=Path(d)/"empty"; p.write_text("",encoding="utf-8")
             ok,msg=MODULE.verify(p); self.assertFalse(ok); self.assertIn("no SCAR records",msg)
 if __name__ == "__main__": unittest.main()
+
+import importlib.util,json,tempfile,unittest
+from pathlib import Path
+S=importlib.util.spec_from_file_location("scar",Path(__file__).parents[1]/"scripts"/"scar_pqc_attest.py")
+M=importlib.util.module_from_spec(S);S.loader.exec_module(M)
+class GenesisTests(unittest.TestCase):
+ def test_committed_genesis_hash(self):
+  record=json.loads((Path(__file__).parents[1]/"SCAR.jsonl").read_text(encoding="utf-8"))
+  self.assertEqual(record["hash"],M.digest(record))
+ def test_committed_genesis_verifies(self):
+  ok,msg=M.verify(Path(__file__).parents[1]/"SCAR.jsonl")
+  self.assertTrue(ok,msg)
