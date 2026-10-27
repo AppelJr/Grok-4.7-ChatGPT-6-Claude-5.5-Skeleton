@@ -81,9 +81,9 @@ jobs:
               except json.JSONDecodeError as e:
                   print(f"SCAR_CHAIN=FAIL (malformed JSON: {rec}): {e}")
                   sys.exit(1)
-              if prev_hash is not None and data.get("hash_prev") is not None:
-                  if data["hash_prev"] != prev_hash:
-                      print(f"SCAR_CHAIN=FAIL (broken link at {rec})")
+              if prev_hash is not None:
+                  if data.get("hash_prev") != prev_hash:
+                      print(f"SCAR_CHAIN=FAIL (missing or broken hash_prev link at {rec})")
                       sys.exit(1)
               canonical = json.dumps(data, sort_keys=True, separators=(",", ":")).encode("utf-8")
               prev_hash = hashlib.sha256(canonical).hexdigest()
