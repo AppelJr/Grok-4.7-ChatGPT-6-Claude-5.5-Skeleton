@@ -1,18 +1,15 @@
-name: Self-Hosted Linux Workflow
+name: sovereign workflow
 
 on:
   push:
-    branches: 
-    - main
-    
+    branches: [ main ]
   pull_request:
-    branches: 
-    - main
+    branches: [ main ]
 
 jobs:
-  build: linux-self-hosted-ARM64-runner
-    name: Build on Self-Hosted Linux
-    runs-on: self-hosted
+  build:
+    name: Build on ubuntu Linux
+    runs-on: unbuntu-latest
     steps:
       - name: Checkout Repository
        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
