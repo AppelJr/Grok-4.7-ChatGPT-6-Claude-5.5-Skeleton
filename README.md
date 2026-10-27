@@ -7,7 +7,6 @@ Do not push directly to main. Create a Pull Request for review.
 ---
 
 # https://github.com/AppelJr/Grok-4.7-ChatGPT-6.1-Claude-5.5-Skeleton/tree/main
-
 This repository is the full SuperGrok workspace: dashboard, bridge, backend, mobile, voice, security, and support modules all live here.
 
 ## What this repo contains
