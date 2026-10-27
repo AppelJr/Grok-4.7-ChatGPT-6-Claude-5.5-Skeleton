@@ -51,7 +51,8 @@ jobs:
             python3 -m py_compile scripts/scar_pqc_attest.py
             echo "SCAR_SOURCE_GATE=PASS"
           else
-            echo "SCAR_SOURCE_GATE=SKIP (no scripts/scar_pqc_attest.py)"
+            echo "SCAR_SOURCE_GATE=FAIL (required scripts/scar_pqc_attest.py missing)"
+            exit 1
           fi
       - name: SCAR hash-chain integrity check
         shell: bash
@@ -66,12 +67,12 @@ jobs:
                       scar_dir = pathlib.Path(alt)
                       break
           if not scar_dir.exists():
-              print("SCAR_CHAIN=SKIP (no SCAR records directory found)")
-              sys.exit(0)
+              print("SCAR_CHAIN=FAIL (no SCAR records directory found)")
+              sys.exit(1)
           records = sorted(scar_dir.rglob("*.json"))
           if not records:
-              print("SCAR_CHAIN=SKIP (no SCAR JSON records found)")
-              sys.exit(0)
+              print("SCAR_CHAIN=FAIL (no SCAR JSON records found)")
+              sys.exit(1)
           prev_hash = None
           checked = 0
           for rec in records:
@@ -93,5 +94,6 @@ jobs:
         shell: bash
         run: |
           set -Eeuo pipefail
+          test "${{ steps.gate.outcome }}" = "success"
           echo "SCAR_ATTESTATION=PASS"
-          echo "SCAR pipeline: source gate + hash-chain integrity + fail-closed on corruption"
+          echo "SCAR pipeline: source gate + hash-chain integrity + fail-closed on missing evidence or corruption"
